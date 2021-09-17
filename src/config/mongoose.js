@@ -3,15 +3,8 @@ const mongoose = require('mongoose');
 
 module.exports = function() {
     mongoose.Promise = global.Promise;
-    let conn_string = 'mongodb://';
-    conn_string += process.env.DB_USER + ':';
-    conn_string += process.env.DB_PASSWORD + '@';
-    conn_string += process.env.DB_CLUSTER + '/';
-    conn_string += process.env.DB_NAME + '?';
-    conn_string += process.env.DB_OPTIONS;
-    const db = mongoose.connect(conn_string, {
-        useMongoClient: true
-    });
+    const conn_string = process.env.DB_CONNECTION
+    const db = mongoose.connect(conn_string);
     require('../models/userModel');
     require('../models/roundModel');
     require('../models/playerModel');
